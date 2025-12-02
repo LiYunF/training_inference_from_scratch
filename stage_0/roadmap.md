@@ -142,23 +142,15 @@ def train_loop(dataloader, model, loss_fn, optimizer):
 
 你已经学会跑`ddp.py`了，所以可以把`stage_0/ddp_with_profiler.py`也跑了，自己看懂参数跑一下
 
-跑完后会在`/tmp/`下生成若干个`trace_*.json`，然后运行`stage_0/merge_profiler.py`(ai写的)，会得到`/tmp/trace_merged.json`, 我们把这个merge json丢到[perfetto.dev](https://ui.perfetto.dev/)中打开我们`export_chrome_trace`
+跑完后会在`/tmp/`下生成若干个`trace_*.json`，然后运行`stage_0/merge_profiler.py`(ai写的)，会得到`/tmp/trace_merged.json`, 我们把这个merge json丢到[perfetto.dev](https://ui.perfetto.dev/)中打开
 
 我们在timeline的最左边，会发现有stream和thread两种timeline，分别对应gpu和cpu的活动。
 
 cpu活动中会有我们这份代码中ddp的详细堆栈，我们可以放大，在尾巴里找到有`cudaLaunchKernel`的cpu活动，会发现他有一条曲线连在gpu活动，表示对应关系。
 
-TODO
+然后我们在单卡训练也这样做一个profiler，放到新的perfetto窗口打开
 
-
-##### 单卡训练
-
-TODO
-
-
-##### 多卡训练
-
-TODO
+TODO: 现象描述和对比
 
 #### GPU的基本概念
 
