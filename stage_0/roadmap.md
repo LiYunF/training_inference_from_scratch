@@ -287,11 +287,11 @@ barrier()
 
 没传数据那能做什么？由于集合通信会同时结束，所以本质上这是一次进度同步，让四个rank的进程同步到某行指令
 
-##### BoardCast
+##### BroadCast
 
 将rank $0,1,2,3$的其中一个rank的数据，广播到$0,1,2,3$，最后的结果是：rank $0,1,2,3$有同样的数据。
 
-![BoardCast](https://www.meemx.com/p/mpi-collective-communication/image-20250702234003965.png)
+![BroadCast](https://www.meemx.com/p/mpi-collective-communication/image-20250702234003965.png)
 
 
 ##### Scatter
@@ -323,7 +323,7 @@ barrier()
 
 简称`AG`
 
-可以理解为：把`Gather`的结果再`Boardcast`给所有rank。
+可以理解为：把`Gather`的结果再`BroadCast`给所有rank。
 - 注意只是能这么理解，不是说实际上拆分成了这两种原语
 
 ![All Gather](https://www.meemx.com/p/mpi-collective-communication/image-20250702234424578.png)
@@ -354,7 +354,7 @@ rank $0, 1, 2, 3$各自把自己的数据拆成$n = 4$份，这样比如rank $0$
 
 简称`AR`
 
-和`Gather` / `All Gather`的关系同理，可以理解成是把`Reduce`的结果`Boardcast`一遍
+和`Gather` / `All Gather`的关系同理，可以理解成是把`Reduce`的结果`BroadCast`一遍
 - 注意只是能这么理解，不是说实际上拆分成了这两种原语
 
 注意，既然有`Reduce`，所以也带有“某种操作“
